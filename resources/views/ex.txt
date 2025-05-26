@@ -1,0 +1,144 @@
+vel may reject due to constraints or security policies.
+
+✅ 2. Input Name Mismatch
+In the blade form:
+
+blade
+Copy
+Edit
+<input type="password" class="form-control" name="password_confirmed" id="confirmPassword" />
+But in the controller, you're validating using:
+
+php
+Copy
+Edit
+'same:password_confirmation'
+The name should be password_confirmation, not password_confirmed.
+
+✅ Fixed Version
+🔧 AdminoptionController.php
+php
+Copy
+Edit
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Admin_reg;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
+class AdminoptionController extends Controller
+{
+    public function index()
+    {
+        return view('option');
+    }
+
+    public function register(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email',
+            'password' => 'required|string|min:3|confirmed', // uses 'password_confirmation'
+        ]);
+
+        // Hash the password before saving
+        $data['password'] = Hash::make($data['password']);
+
+        $admin = Admin_reg::create($data); 
+
+        if ($admin) {
+            return redirect()->route('login')->with('success', 'Admin added successfully.');
+        } else {
+            return back()->with('error', 'Registration failed. Please try again.');
+        }
+    }
+}
+🖊️ Blade File (register.blade.php)
+Ensure this line:
+
+blade
+Copy
+Edit
+<input type="password" class="form-control" name="password_confirmed" ... />
+is changed to:
+
+blade
+Copy
+Edit
+<input type="password" class="form-control" name="password_confirmation" ... />
+Full corrected section:
+
+blade
+Copy
+Edit
+<div class="mb-3">
+    <label for="confirmPassword" class="form-label">Confirm Password</label>
+    <input type="password" class="form-control" name="password_confirmation" id="confirmPassword"
+        placeholder="Confirm password" />
+    @error('password')
+        <p style="color: red">{{ $message }}</p>
+    @enderror
+</div>
+✅ Double-Check Your Route
+In web.php, make sure this route exists:
+
+php
+Copy
+Edit
+Route::post('/register', [AdminoptionController::class, 'register'])->name('register.submit');
+Route::get('/option', [AdminoptionController::class, 'index'])->name('option');
+✅ Verify the Table admin_reg Exists
+Ensure you have migrated your database and the admin_reg table is present with the correct columns:
+
+bash
+Copy
+Edit
+php artisan migrate
+✅ Optional: Add Fillable Guard in Model
+Your Admin_reg.php model looks correct:
+
+php
+Copy
+Edit
+protected $fillable = ['name', 'email', 'password'];
+✅ Summary
+Here’s what you must fix:
+
+✅ Use password_confirmation in form name.
+
+✅ Use confirmed in validation and hash the password before saving.
+
+✅ Ensure database table and routes are correct.
+
+Let me know if you want hel
+
+
+
+
+ public function register(Request $request)
+//     {
+//         try {
+//             $data = $request->validate([
+//                 'name' => 'required|string|max:255',
+//                 'email' => 'required|string|email|max:255',
+//                 'password' => 'required|string|min:3|confirmed',
+//             ]);
+
+//             // Encrypt password
+//             $data['password'] = Hash::make($data['password']);
+
+//             $admin = Admin_reg::create($data);
+
+//             if ($admin) {
+//                 return redirect()->route('login')->with('success', 'Admin added successfully.');
+//             } else {
+//                 return back()->with('error', 'Registration failed. Please try again.');
+//             }
+//         } catch (\Exception $e) {
+//             Log::error('Admin registration failed: ' . $e->getMessage());
+//             return back()->with('error', 'An unexpected error occurred. Please try again.');
+//         }
+//     }
+// }
