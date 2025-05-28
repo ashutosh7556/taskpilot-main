@@ -11,23 +11,38 @@
     <div class="row justify-content-center">
       <div class="col-md-4">
         <h2 class="mb-4 text-center">Login</h2>
-        <form action="{{route('user.dashboard')}}" method="post">
+        <form action="{{route('user.login')}}" method="post">
 
           @csrf
 
           <div class="mb-3">
             <label for="login" class="form-label">Email</label>
             <input type="text" id="login" name="email" class="form-control" placeholder="Enter your name or email" required />
+            @error('email')
+            <p class="text-danger">{{ $message }}</p>
+        @enderror
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
             <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" required />
+
+            @error('password')
+            <p class="text-danger">{{ $message }}</p>
+        @enderror
           </div>
           <button type="submit" class="btn btn-primary w-30">Login</button>
-
           <a href="{{route('option') }}" class="btn btn-primary w-30">Back</a>
 
+
+          @if ($error = $errors->first('login'))
+          <div class="alert alert-danger">
+            {{ $error }}
+            
+          </div>
+        @endif
+
         </form>
+
       </div>
     </div>
   </div>

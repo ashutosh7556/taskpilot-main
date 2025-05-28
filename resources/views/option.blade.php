@@ -14,8 +14,7 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.options') }}">home</a>
-              </li>
+               </li>
               
             </ul>
           </div>
@@ -29,6 +28,7 @@
         
         <a  class="btn btn-primary m-2" href="{{route('user.login')}}">
             <i class="bi bi-box-arrow-in-right"></i> Login
+            
         </a>
         
         <a  class="btn btn-success m-2" href="{{route('register.submit')}}" >

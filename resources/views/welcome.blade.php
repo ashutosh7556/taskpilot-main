@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,33 +7,41 @@
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
-</head>
+ </head>
 <body>
 
   <!-- Navbar -->
-  <form action="{{ route('home') }}">
-   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">TaskPilot</a>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+
+      <!-- Navbar Toggler for mobile -->  
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar Links -->
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.options') }}">user</a>
+            <a class="nav-link" href="{{ route('admin.options') }}">User</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">admin</a>
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Admin</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-</form>
- 
-   <!-- Page Content -->
+
+  <!-- Page Content -->
   <div class="container mt-5">
-    <h1 class="text-center">Welcome to TaskPilot</h1>
+    <div class="card shadow-sm">
+      <div class="card-body text-center">
+        <h1 class="card-title">Welcome to TaskPilot</h1>
+        <p class="card-text">Your task management assistant.</p>
+      </div>
+    </div>
   </div>
 
   <!-- Bootstrap JS -->
