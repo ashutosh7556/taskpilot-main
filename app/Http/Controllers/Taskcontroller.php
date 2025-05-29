@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
 
-
 class TaskController extends Controller
 {
     public function create()
@@ -56,6 +55,10 @@ class TaskController extends Controller
         $task = Task::findOrFail($id);
         $task->delete();
 
+        if (request()->ajax()) {
+            return response()->json(['message' => 'Task deleted successfully.']);
+        }
+
         return redirect()->route('user.dashboard')->with('success', 'Task deleted successfully.');
     }
 
@@ -65,19 +68,34 @@ class TaskController extends Controller
         return view('dashboard', compact('tasks'));
     }
 
-    public function taketask(Request $request)
+    public function TakeTask(Request $request)
     {
-        $task = Task::findOrFail();
+//        \Log::info('TakeTask called with:', $request->all());
 
-        $task->status = $request->status; // Example: 'in_progress', 'done', 'pending'
+        $request->validate([
+            'task_id' => 'required|exists:task,id',
+            'status' => 'required|in:in_progress,done',
+        ]);
+
+        $task = Task::findOrFail($request->task_id);
+        $task->status = $request->status;
+        $task->user_id = auth()->id();
         $task->save();
 
-        return redirect()->route('user.dashboard')->with('success', 'Task status updated.');
+        $message = $request->status === 'done'
+            ? 'Task is done successfully.'
+            : 'Task in progress.';
+
+        return response()->json(['message' => $message]);
     }
+
+    public function loadTakeTask($id)
+    {
+        $task = Task::findOrFail($id);
+        return view('takeTask', compact('task'));
+    }
+
 }
-
-
-
 
 
 

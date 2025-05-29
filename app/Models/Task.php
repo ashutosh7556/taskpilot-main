@@ -10,12 +10,11 @@ class Task extends Model
     use HasFactory;
 
      protected $table='task';
-    protected $fillable=[
+    protected $fillable = [
         'title',
         'description',
-        'user_id'
-    
-    
-    
+        'user_id',
+        'status',
     ];
+
 }

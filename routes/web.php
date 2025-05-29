@@ -70,5 +70,7 @@ Route::delete('/taskupdate/{id}', [TaskController::class, 'destroy'])->name('tas
 
 
 
-Route::get('/taketask', [TaskController::class, 'taketask'])->name('taketask');
+
+Route::get('/load-take-task/{id}', [TaskController::class, 'loadTakeTask']);
+Route::post('/task-taken', [TaskController::class, 'TakeTask'])->name('TakeTask');
 
