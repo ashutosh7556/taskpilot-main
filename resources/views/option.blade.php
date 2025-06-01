@@ -27,7 +27,7 @@
         <h2>Welcome, user</h2>
         <p>Please choose an option:</p>
         
-        <a  class="btn btn-primary m-2" href="{{route('user.login')}}">
+        <a  class="btn btn-primary m-2" href="{{route('login2.post')}}">
             <i class="bi bi-box-arrow-in-right"></i> Login
         </a>
         

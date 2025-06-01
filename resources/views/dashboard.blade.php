@@ -18,7 +18,7 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link"  href="{{ route('user.logout') }}" >logout</a>
+            <a class="nav-link"  href="{{ route('login2.post') }}" >logout</a>
 
           </li>
         
