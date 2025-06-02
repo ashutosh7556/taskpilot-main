@@ -35,9 +35,9 @@
         <a href="{{ route('Tasks.create') }}" class="btn btn-primary">+ Create New Task</a>
     </div>
     @endif
-
     <h3 class="mb-4">Available Tasks</h3>
     <div class="row g-4">
+
         @forelse($tasks as $task)
         <div class="col-md-4">
             <div class="card h-100 shadow-sm">
@@ -70,7 +70,8 @@
 
     </div>
     @else
-    <h2 class="mb-3 text-danger">Unauthorized access. Please <a href="{{ route('user.login') }}">login</a>.</h2>
+    <h2 class="mb-3 text-danger">Unauthorized access. Please <a href="{{ route('login2.post') }}">login</a>.</h2>
+
     @endauth
 </div>
 

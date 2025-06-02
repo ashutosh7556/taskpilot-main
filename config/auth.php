@@ -34,13 +34,18 @@ return [
     | Supported: "session"
     |
     */
-
     'guards' => [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'admin' => [ // ✅ This must exist
+            'driver' => 'session',
+            'provider' => 'admins', // ✅ Must match the key in providers below
+        ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -65,11 +70,12 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'admins' => [ // ✅ This must match the 'provider' value above
+            'driver' => 'eloquent',
+            'model' => App\Models\Admins::class, // ✅ Make sure this model exists
+        ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------

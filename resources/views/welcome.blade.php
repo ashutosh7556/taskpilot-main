@@ -11,7 +11,7 @@
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">TaskPilot</a>
 
@@ -24,18 +24,16 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.options') }}">User</a>
+            <a class="nav-link" href="{{ route('admin.options') }}">Login</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Admin</a>
-          </li>
+
         </ul>
       </div>
     </div>
   </nav>
 
   <!-- Page Content -->
-  <div class="container mt-5">
+   <div class="container mt-5">
     <div class="card shadow-sm">
       <div class="card-body text-center">
         <h1 class="card-title">Welcome to TaskPilot</h1>
@@ -43,8 +41,7 @@
       </div>
     </div>
   </div>
-
-  <!-- Bootstrap JS -->
+    <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

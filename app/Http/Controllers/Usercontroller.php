@@ -14,6 +14,12 @@ class Usercontroller extends Controller
     {
         return view('register');
     }
+    public function adminDashboard()
+    {
+        $users = User::with('tasks')->get(); // eager load tasks
+        return view('admindashboard', compact('users'));
+    }
+
 
     public function register(Request $request)
     {
@@ -29,7 +35,7 @@ class Usercontroller extends Controller
         $user = User::create($data);
 
         if ($user) {
-            return redirect()->route('user.login')->with('success', 'Registration successful, please login.');
+            return redirect()->route('login2.post')->with('success', 'Registration successful, please login.');
         }
 
         return back()->with('error', 'Registration failed');
@@ -62,6 +68,11 @@ class Usercontroller extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('user.login');
+        return redirect()->route('login2.post');
+    }
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect()->back()->with('success', 'User deleted successfully.');
     }
 }

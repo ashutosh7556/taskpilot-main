@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 
 class Authcontroller extends Controller
 {
-    
+
      public function login(Request $request)  {
 
         $user = $request->validate([
             'email' => 'required|string|email',
-            'password' => 'required|string|min:3', 
-        ]);        
+            'password' => 'required|string|min:3',
+        ]);
 
         // echo print_r($value);die();
 
@@ -20,13 +20,13 @@ class Authcontroller extends Controller
             return redirect()->route('user.dashboard');
         }
 
- 
+
     }
 
      public function dashboard() {
-        
+
         if (Auth::check()) {
        return  view('dashboard');
-    } 
+    }
      }
 }
